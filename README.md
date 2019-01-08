@@ -9,9 +9,9 @@ My first game ever. It has been written on jQuery 3.
     npm i
 ```
 
-1. install webpack 
+1. install webpack, webpack-cli and webpack-dev-server
 ```
-    sudo npm i -g webpack   
+    sudo npm i -g webpack webpack-cli webpack-dev-server  
 ```
 
    or  
@@ -19,20 +19,8 @@ My first game ever. It has been written on jQuery 3.
 ```bash
     sudo yarn add -g webpack
 ```
-2. use webpack
+2. use webpack-dev-server
 
 ```
-    webpack
-```
-
-3. install node-static
-
-```
-    sudo npm i -g node-static
-```
-
-4. use node-static
-
-```
-    static
+    webpack-dev-server
 ```
