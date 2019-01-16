@@ -51,4 +51,20 @@ export class GameFramework {
             }, animation.rate);
         }
     }
+
+    /**
+     * This function adds a sprite the div defined by the first argument
+     **/
+    addSprite (parentId, divId, options) {
+        var options = $.extend({
+            x: 0,
+            y: 0,
+            width: 64,
+            height: 64
+        }, options);
+
+        $(`#${parentId}`).append(`<div id='${divId}' style='position: absolute, 
+        left: ${options.x}px; top: ${options.y}; width: ${options.width}px; 
+        height: ${options.height}px;</div>'`)
+    }
 }
