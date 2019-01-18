@@ -67,4 +67,26 @@ export class GameFramework {
         left: ${options.x}px; top: ${options.y}; width: ${options.width}px; 
         height: ${options.height}px;</div>'`)
     }
+
+    /**
+     * This function sets or returns the position along the x-axis.
+     **/
+    x (divId, position) {
+        if (position) {
+            $(`#${divId}`).css("left", position);
+        } else {
+            return parseInt($(`#${divId}`).css("left"));
+        }
+    }
+
+    /**
+     * This function sets or returns the position along the x-axis.
+     **/
+    y (divId, position) {
+        if (position) {
+            $(`#${divId}`).css("top", position);
+        } else {
+            return parseInt($(`#${divId}`).css("top"));
+        }
+    }
 }
