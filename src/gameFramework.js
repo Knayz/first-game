@@ -2,6 +2,7 @@ import $ from "jquery"
 
 export class GameFramework {
     static animationHandles = {};
+    static imagesToPreload = [];
 
     /**
      * This function sets the current frame.
@@ -24,6 +25,9 @@ export class GameFramework {
             rate: 30
         };
         $.extend(this, defaultValues, options);
+        if (this.url) {
+            GameFramework.addImage(this.url);
+        }
     }
 
     /**
@@ -88,5 +92,51 @@ export class GameFramework {
         } else {
             return parseInt($(`#${divId}`).css("top"));
         }
+    }
+
+    /**
+     * Add an image to the list of image to preload
+     **/
+    static addImage (url) {
+        if ($.inArray(url, this.imagesToPreload) < 0) {
+            this.imagesToPreload.push();
+        }
+        this.imagesToPreload.push(url);
+    }
+
+    /**
+     * Start the preloading of the images.
+     **/
+    static startPreloading (endCallback, progressCallback) {
+        const images = [];
+        const total = this.imagesToPreload.length;
+
+        for ( let  i = 0; i < total; i++) {
+            const image = new Image();
+            images.push(image);
+            image.src = this.imagesToPreload[i];
+        }
+
+        const preloadingPoller = setInterval(() => {
+            let couter = 0;
+            const total = this.imagesToPreload.length;
+
+            for (let i = 0; i < total.length; i++) {
+                if (images[i].complete) {
+                    counter++;
+                }
+            }
+
+            if (couter === total) {
+                //we are done
+                clearInterval(preloadingPoller);
+                endCallback();
+            } else {
+                if (progressCallback) {
+                    count++;
+                    progressCallback((count / total) * 100);
+                }
+            }
+        }, 100);
     }
 }
