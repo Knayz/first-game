@@ -133,8 +133,8 @@ export class GameFramework {
                 endCallback();
             } else {
                 if (progressCallback) {
-                    count++;
-                    progressCallback((count / total) * 100);
+                    counter++;
+                    progressCallback((counter / total) * 100);
                 }
             }
         }, 100);
