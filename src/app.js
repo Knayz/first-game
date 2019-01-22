@@ -39,4 +39,31 @@ $(() => {
     $("#startButton").on("click", () => {
         GF.startPreloading(initialize);
     });
+
+    var screenWidth = 640;
+    var packets1 = {
+        position: 300,
+        speed: 3
+    }
+    /* and so on */
+    var gameState = "START";
+    var gameLoop = function() {
+        packets1.position += packets1.speed;
+        $("#packets1").css("background-position",""+ packets1.position
+            +"px 0px");
+        /* and so on */
+        var newPos = gf.x("player");
+        switch(gameState){
+            case "LINE1":
+                newPos += packets1.speed;
+                break;
+            case "LINE2":
+                newPos += packets2.speed;
+                break;
+            case "LINE3":
+                newPos += packets3.speed;
+                break;
+        }
+        gf.x("player", newPos);
+    };
 });
