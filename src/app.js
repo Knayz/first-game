@@ -66,4 +66,38 @@ $(() => {
         }
         gf.x("player", newPos);
     };
+
+    $(document).keydown(function(e){
+        if(gameState != "WON" && gameState != "GAMEOVER"){
+            switch(e.keyCode){
+                case 37: //left
+                    gf.x("player",gf.x("player") - 5);
+                    break;
+                case 39: // right
+                    gf.x("player",gf.x("player") + 5);
+                    break;
+                case 38: // jump
+                    switch(gameState){
+                        case "START":
+                            $("#player").animate({top: 400},function()
+                            {
+                                gameState = "LINE1";
+                            });
+                            break;
+                        case "LINE1":
+                            $("#player").animate({top: 330},function()
+                            {gameState = "LINE2";
+                            });
+                            break;
+                        /* and so on */
+                        case "LINE6":
+                            $("#player").animate({top: 0},function(){
+                                gameState = "WON";
+                                $("#lifes").html("You won!");
+                            });
+                            break;
+                    }
+            }
+        }
+    });
 });
