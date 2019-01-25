@@ -129,4 +129,34 @@ $(() => {
         }
         return true;
     }
+
+    var detectSafe = function(state){
+        switch(state){
+            case "LINE1":
+                var relativePosition = (gf.x("player") - packets1.
+                    position) % 230;
+                relativePosition = (relativePosition < 0) ?
+                    relativePosition + 230: relativePosition;
+                if(relativePosition > 110 && relativePosition < 210) {
+                    return true;
+                } else {
+                    return false;
+                }
+                break;
+            /* and so on */
+            case "LINE4":
+                var relativePosition = (gf.x("player") - bugs1.position) %
+                    190;
+                relativePosition = (relativePosition < 0) ?
+                    relativePosition + 190: relativePosition;
+                if(relativePosition < 130) {
+                    return true;
+                } else {
+                    return false;
+                }
+                break;
+            /* and so on */
+        }
+        return true;
+    }
 });
