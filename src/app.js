@@ -159,4 +159,32 @@ $(() => {
         }
         return true;
     }
+    var life = 3;
+    var kill = function (){
+        life--;
+        if(life == 0) {
+            gameState = "GAMEOVER";
+            $("#lifes").html("Game Over!");
+        } else {
+            $("#lifes").html("life: "+life);
+            switch(gameState){
+                case "START":
+                case "LINE1":
+                case "LINE2":
+                case "LINE3":
+                    gf.x("player", 260);
+                    gf.y("player", 440);
+                    gameState = "START";
+                    break;
+                case "REST":
+                case "LINE4":
+                case "LINE5":
+                case "LINE6":
+                    gf.x("player", 260);
+                    gf.y("player", 220);
+                    gameState = "REST";
+                    break;
+            }
+        }
+    }
 });
