@@ -24,10 +24,12 @@ export class GameFramework {
             currentFrame: 0,
             rate: 30
         };
+        //TODO: rewrite on es6 spread
         $.extend(this, defaultValues, options);
         if (this.url) {
             GameFramework.addImage(this.url);
         }
+
     }
 
     /**
@@ -44,6 +46,8 @@ export class GameFramework {
 
         if (animation.numberOfFrames > 1) {
             GameFramework.animationHandles[divId] = setInterval(() => {
+                //TODO: debug this code. I think increment have to be in the end.
+                // Couse the animation starts with not first frame, instead the second.
                 animation.currentFrame++;
                 if (!loop && currentFrame > animation.numberOfFrames) {
                     clearInterval(GameFramework.animationHandles[divId]);
@@ -59,13 +63,16 @@ export class GameFramework {
     /**
      * This function adds a sprite the div defined by the first argument
      **/
-    addSprite (parentId, divId, options) {
-        var options = $.extend({
-            x: 0,
-            y: 0,
-            width: 64,
-            height: 64
-        }, options);
+    static addSprite (parentId, divId, options) {
+        options = {
+            ...{
+                x: 0,
+                y: 0,
+                width: 64,
+                height: 64
+            },
+            options
+        };
 
         $(`#${parentId}`).append(`<div id='${divId}' style='position: absolute, 
         left: ${options.x}px; top: ${options.y}; width: ${options.width}px; 
@@ -75,7 +82,7 @@ export class GameFramework {
     /**
      * This function sets or returns the position along the x-axis.
      **/
-    x (divId, position) {
+    static x (divId, position) {
         if (position) {
             $(`#${divId}`).css("left", position);
         } else {
@@ -86,7 +93,7 @@ export class GameFramework {
     /**
      * This function sets or returns the position along the x-axis.
      **/
-    y (divId, position) {
+    static y (divId, position) {
         if (position) {
             $(`#${divId}`).css("top", position);
         } else {
@@ -98,7 +105,7 @@ export class GameFramework {
      * Add an image to the list of image to preload
      **/
     static addImage (url) {
-        if ($.inArray(url, this.imagesToPreload) < 0) {
+        if (~$.inArray(url, this.imagesToPreload)) {
             this.imagesToPreload.push();
         }
         this.imagesToPreload.push(url);

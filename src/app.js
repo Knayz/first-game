@@ -21,8 +21,8 @@ $(() => {
     const initalize = () => {
         $("#mygame").append("<div id='container' style='display:none;' width: 640px; height: 480px;'>");
 
-        gf.addSprite("container","background",{width: 640, height: 480});
-        gf.addSprite("container","packets1",{width: 640, height: 40, y:
+        GF.addSprite("container","background",{width: 640, height: 480});
+        GF.addSprite("container","packets1",{width: 640, height: 40, y:
                 400});
         /* and so on */
         GF.addSprite("container","player",{width: 40, height: 40, y: 440,
@@ -52,7 +52,7 @@ $(() => {
         $("#packets1").css("background-position",""+ packets1.position
             +"px 0px");
         /* and so on */
-        var newPos = gf.x("player");
+        var newPos = GF.x("player");
         switch(gameState){
             case "LINE1":
                 newPos += packets1.speed;
@@ -64,17 +64,17 @@ $(() => {
                 newPos += packets3.speed;
                 break;
         }
-        gf.x("player", newPos);
+        GF.x("player", newPos);
     };
 
     $(document).keydown(function(e){
-        if(gameState != "WON" && gameState != "GAMEOVER"){
+        if(gameState !== "WON" && gameState !== "GAMEOVER"){
             switch(e.keyCode){
                 case 37: //left
-                    gf.x("player",gf.x("player") - 5);
+                    GF.x("player",GF.x("player") - 5);
                     break;
                 case 39: // right
-                    gf.x("player",gf.x("player") + 5);
+                    GF.x("player",GF.x("player") + 5);
                     break;
                 case 38: // jump
                     switch(gameState){
@@ -100,35 +100,7 @@ $(() => {
             }
         }
     });
-    var detectSafe = function(state){
-        switch(state){
-            case "LINE1":
-                var relativePosition = (gf.x("player") - packets1.
-                    position) % 230;
-                relativePosition = (relativePosition < 0) ?
-                    relativePosition + 230: relativePosition;
-                if(relativePosition > 110 && relativePosition < 210) {
-                    return true;
-                } else {
-                    return false;
-                }
-                break;
-            /* and so on */
-            case "LINE4":
-                var relativePosition = (gf.x("player") - bugs1.position) %
-                    190;
-                relativePosition = (relativePosition < 0) ?
-                    relativePosition + 190: relativePosition;
-                if(relativePosition < 130) {
-                    return true;
-                } else {
-                    return false;
-                }
-                break;
-            /* and so on */
-        }
-        return true;
-    }
+
 
     var detectSafe = function(state){
         switch(state){
@@ -186,5 +158,20 @@ $(() => {
                     break;
             }
         }
+    }
+    var newPos = gf.x("player");
+    switch(gameState){
+        case "LINE1":
+            newPos += packets1.speed;
+            break;
+        /* and so on */
+    }
+    if(newPos > screenWidth || newPos < -40){
+        kill();
+    } else {
+        if(!detectSafe(gameState)){
+            kill();
+        }
+        gf.x("player", newPos);
     }
 });
