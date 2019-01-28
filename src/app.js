@@ -22,9 +22,13 @@ $(() => {
         $("#mygame").append("<div id='container' style='display:none;' width: 640px; height: 480px;'>");
 
         GF.addSprite("container","background",{width: 640, height: 480});
-        GF.addSprite("container","packets1",{width: 640, height: 40, y:
-                400});
-        /* and so on */
+        GF.addSprite("container","packets1",{width: 640, height: 40, y: 400});
+        GF.addSprite("container","packets2",{width: 640, height: 40, y: 330});
+        GF.addSprite("container","packets3",{width: 640, height: 40, y: 260});
+        GF.addSprite("container","bugs1",{width: 640, height: 40, y: 170});
+        GF.addSprite("container","bugs2",{width: 640, height: 40, y: 100});
+        GF.addSprite("container","bugs3",{width: 640, height: 40, y: 30});
+
         GF.addSprite("container","player",{width: 40, height: 40, y: 440,
             x: 260});
         GF.setAnimation("background", backgroundAnim);
