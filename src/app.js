@@ -34,6 +34,8 @@ $(() => {
         GF.setAnimation("background", backgroundAnim);
         GF.setAnimation("player", playerAnim);
         GF.setAnimation("packets1", networkPacketsAnim);
+        GF.setAnimation("packets2", networkPacketsAnim);
+        GF.setAnimation("packets3", networkPacketsAnim);
         /* and so on */
         $("#startButton").remove();
         $("#container").append("<div id='lifes' style='position: relative; color: #FFF;'>life: 3</div>").css("display", "block");
