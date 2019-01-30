@@ -36,7 +36,11 @@ $(() => {
         GF.setAnimation("packets1", networkPacketsAnim);
         GF.setAnimation("packets2", networkPacketsAnim);
         GF.setAnimation("packets3", networkPacketsAnim);
-        /* and so on */
+        GF.setAnimation("bugs1", bugsAnim);
+        GF.setAnimation("bugs2", bugsAnim);
+        GF.setAnimation("bugs3", bugsAnim);
+        GF.setAnimation("front", frontAnim);
+
         $("#startButton").remove();
         $("#container").append("<div id='lifes' style='position: relative; color: #FFF;'>life: 3</div>").css("display", "block");
         setInterval(gameLoop, 100);
