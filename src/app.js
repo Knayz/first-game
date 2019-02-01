@@ -59,6 +59,22 @@ $(() => {
         position: 0,
         speed: -5
     }
+    var packets3 = {
+        position: 30,
+        speed: 5
+    }
+    var bugs1 = {
+        position: 100,
+        speed: -10
+    }
+    var bugs2 = {
+        position: 0,
+        speed: -6
+    }
+    var bugs3 = {
+        position: 50,
+        speed: -8
+    }
     var gameState = "START";
     var gameLoop = function() {
         packets1.position += packets1.speed;
